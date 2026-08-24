@@ -34,7 +34,7 @@
     {{ content }}
     {% assign cats = site.categories | sort %}
     {% for cat in cats %}
-      <div><a href="/{{ cat[0] }}/">{{ cat[0] }}</a></div>
+    <div><a href="{{ site.baseurl }}/{{ cat[0] }}/">{{ cat[0] }}</a></div>
     {% endfor %}
   </div>
 </body>
