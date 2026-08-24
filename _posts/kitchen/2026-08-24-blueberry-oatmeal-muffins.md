@@ -12,6 +12,7 @@ categories: [kitchen]
 블루베리 100g<br>
 바닐라 오일 3방울<br>
 아몬드 브리즈 또는 우유 50ml<br>
+180°C 20-30분
 
 끝
 
@@ -23,6 +24,6 @@ greek yogurt 100g<br>
 blueberries 100g<br>
 vanilla oil 3 drops<br>
 almond breeze or milk 50ml<br>
-
+180°C 20-30minutes
 
 end
