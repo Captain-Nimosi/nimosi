@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>{{ page.title }}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500&display=swap');
+  body {
+    font-family: 'Noto Serif', serif;
+    font-size: 14px;
+    color: #111;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .links {
+    text-align: center;
+    line-height: 2.2;
+  }
+  a {
+    color: #111;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+  <div class="links">
+    {{ content }}
+    {% assign cats = site.categories | sort %}
+    {% for cat in cats %}
+      <div><a href="/{{ cat[0] }}/">{{ cat[0] }}</a></div>
+    {% endfor %}
+  </div>
+</body>
+</html>
