@@ -10,14 +10,11 @@
     font-size: 14px;
     color: #111;
     background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
     margin: 0;
+    padding: 60px 40px;
   }
   .links {
-    text-align: center;
+    text-align: left;
     line-height: 2.2;
   }
   a {
@@ -34,7 +31,7 @@
     {{ content }}
     {% assign cats = site.categories | sort %}
     {% for cat in cats %}
-    <div><a href="{{ site.baseurl }}/{{ cat[0] }}/">{{ cat[0] }}</a></div>
+      <div><a href="{{ site.baseurl }}/{{ cat[0] }}/">{{ cat[0] }}</a></div>
     {% endfor %}
   </div>
 </body>
