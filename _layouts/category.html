@@ -27,9 +27,9 @@
   <div class="post-list">
     {% assign posts = site.categories[page.category_name] %}
     {% for post in posts %}
-      <div><a href="{{ post.url }}">{{ post.title }}</a></div>
+      <div><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
     {% endfor %}
   </div>
-  <div class="back"><a href="/">← home</a></div>
+  <div class="back"><a href="{{ site.baseurl }}/">← home</a></div>
 </body>
 </html>
