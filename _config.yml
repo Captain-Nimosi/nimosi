@@ -1,3 +1,4 @@
 title: Nimosi Archive
 description: Archives
 markdown: kramdown
+exclude: ["README.md"]
