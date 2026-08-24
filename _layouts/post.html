@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>{{ page.title }}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500&display=swap');
+  body {
+    font-family: 'Noto Serif', serif;
+    font-size: 14px;
+    color: #111;
+    background: #fff;
+    margin: 0;
+    padding: 60px 40px;
+  }
+  .nav-top, .nav-bottom { font-size: 12px; opacity: 0.6; }
+  .nav-bottom { margin-top: 60px; }
+  .post-title { font-size: 16px; font-weight: 500; margin: 20px 0; }
+  .post-content { line-height: 1.8; max-width: 600px; }
+  a { color: #111; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <div class="nav-top">
+    <a href="{{ site.baseurl }}/{{ page.categories | first }}/">← {{ page.categories | first }}</a>
+  </div>
+  <div class="post-title">{{ page.title }}</div>
+  <div class="post-content">{{ content }}</div>
+  <div class="nav-bottom">
+    <a href="{{ site.baseurl }}/{{ page.categories | first }}/">← 이전 페이지</a>
+  </div>
+</body>
+</html>
