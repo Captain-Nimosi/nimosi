@@ -1,4 +1,4 @@
 ---
 layout: home
-title: Nimosi's Archive
+title: Nimosi Archive
 ---
