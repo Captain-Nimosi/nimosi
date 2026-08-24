@@ -13,17 +13,21 @@
     margin: 0;
     padding: 60px 40px;
   }
-  .post-list { text-align: left; line-height: 2.2; }
+  .page-title { font-weight: 700; margin-bottom: 16px; }
+  .post-list { line-height: 2.2; }
   a { color: #111; text-decoration: none; }
   a:hover { text-decoration: underline; }
+  .back { margin-top: 60px; }
 </style>
 </head>
 <body>
+  <div class="page-title">{{ page.title }}</div>
   <div class="post-list">
     {% assign posts = site.categories[page.category_name] %}
     {% for post in posts %}
       <div><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
     {% endfor %}
   </div>
+  <div class="back"><a href="{{ site.baseurl }}/">back</a></div>
 </body>
 </html>
