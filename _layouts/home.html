@@ -13,22 +13,15 @@
     margin: 0;
     padding: 60px 40px;
   }
-  .links {
-    text-align: left;
-    line-height: 2.2;
-  }
-  a {
-    color: #111;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
+  .page-title { font-weight: 700; margin-bottom: 16px; }
+  .links { line-height: 2.2; }
+  a { color: #111; text-decoration: none; }
+  a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
+  <div class="page-title">{{ page.title }}</div>
   <div class="links">
-    {{ content }}
     {% assign cats = site.categories | sort %}
     {% for cat in cats %}
       <div><a href="{{ site.baseurl }}/{{ cat[0] }}/">{{ cat[0] }}</a></div>
