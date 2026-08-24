@@ -1,7 +1,15 @@
 ---
 layout: post
-title: "비자 준비 시작"
+title: "applied for IEC working holiday visa"
 date: 2026-08-24
 categories: [canada]
 ---
-123
+2026년 8월 19일자로 모든 서류를 제출했다.
+이제 내가 할 수 있는 건 승인을 기다리는 것이다.
+
+끝
+
+As of 19 August, 2026 I submitted all relevant documents.
+All I can do is wait for the approval.
+
+end
