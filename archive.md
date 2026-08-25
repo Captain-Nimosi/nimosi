@@ -2,7 +2,6 @@
 layout: post
 title: archive
 permalink: /archive/
-back_url: /
 ---
 
 {% assign categories = site.categories | sort %}
