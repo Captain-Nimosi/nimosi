@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>{{ page.title }}</title>
-
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
 
@@ -19,7 +18,7 @@
   .page-title {
     font-weight: 700;
     font-size: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
   .links {
@@ -38,20 +37,11 @@
 </head>
 
 <body>
+  <div class="page-title">{{ site.title }}</div>
 
-<div class="page-title">
-  <a href="{{ site.baseurl }}/">NIMOSI</a>
-</div>
-
-<div class="links">
-  <div>
-    <a href="{{ site.baseurl }}/about/">ABOUT</a>
+  <div class="links">
+    <div><a href="{{ site.baseurl }}/about/">about</a></div>
+    <div><a href="{{ site.baseurl }}/archive/">archive</a></div>
   </div>
-
-  <div>
-    <a href="{{ site.baseurl }}/archive/">ARCHIVE</a>
-  </div>
-</div>
-
 </body>
 </html>
