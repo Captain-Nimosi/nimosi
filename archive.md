@@ -1,12 +1,10 @@
 ---
-layout: default
-title: Archive
+layout: post
+title: archive
 permalink: /archive/
 ---
 
-# Archive
-
-- [Thoughts]({{ "/thoughts/" | relative_url }})
-- [Canada]({{ "/canada/" | relative_url }})
-- [Money]({{ "/money/" | relative_url }})
-- [kitchen]({{ "/kitchen/" | relative_url }})
+- [thoughts]({{ site.baseurl }}/thoughts/)
+- [canada]({{ site.baseurl }}/canada/)
+- [money]({{ site.baseurl }}/money/)
+- [kitchen]({{ site.baseurl }}/kitchen/)
