@@ -5,6 +5,34 @@ const searchResults = document.getElementById("search-results");
 
 let posts = [];
 
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function getSnippet(content, query) {
+  const lowerContent = content.toLowerCase();
+  const idx = lowerContent.indexOf(query);
+  if (idx === -1) return "";
+
+  const start = Math.max(0, idx - 20);
+  const end = Math.min(content.length, idx + query.length + 60);
+
+  let snippet = content.substring(start, end);
+  if (start > 0) snippet = "…" + snippet;
+  if (end < content.length) snippet = snippet + "…";
+
+  snippet = escapeHtml(snippet);
+  const regex = new RegExp(`(${escapeRegExp(query)})`, "gi");
+  return snippet.replace(regex, "<mark>$1</mark>");
+}
+
 fetch("/nimosi/search.json")
   .then(response => response.json())
   .then(data => {
@@ -42,21 +70,22 @@ function performSearch() {
     return;
   }
 
-  searchResults.innerHTML = results.map(post => `
+  searchResults.innerHTML = results.map(post => {
+  const snippet = getSnippet(post.content, query);
+  return `
     <article class="search-result">
-
       <div>
         <a href="${post.url}">
           ${post.date} ${post.title}
         </a>
       </div>
-
+      ${snippet ? `<div class="search-snippet">${snippet}</div>` : ""}
       <div>
         ${post.category}
       </div>
-
     </article>
-  `).join("");
+  `;
+}).join("");
 }
 
 
