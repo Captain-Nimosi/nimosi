@@ -5,13 +5,19 @@ permalink: /search/
 back_url: /
 ---
 
-<div class="search-box">
-  <input
-    type="text"
-    id="search-input"
-    placeholder="search"
-    autocomplete="off"
-  >
+<div class="search-container">
+
+  <div class="search-label">search</div>
+
+  <div class="search-input-wrapper">
+    <input
+      type="text"
+      id="search-input"
+      autocomplete="off"
+    >
+    <button id="search-button">go</button>
+  </div>
+
 </div>
 
 <div id="search-results"></div>
