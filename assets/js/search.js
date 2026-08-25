@@ -1,4 +1,5 @@
 const searchInput = document.getElementById("search-input");
+const searchButton = document.getElementById("search-button");
 const searchResults = document.getElementById("search-results");
 
 let posts = [];
@@ -12,9 +13,7 @@ fetch("/nimosi/search.json")
     console.error("Search data could not be loaded:", error);
   });
 
-searchInput.addEventListener("keydown", function(event) {
-  if (event.key !== "Enter") return;
-
+function performSearch() {
   const query = searchInput.value.trim().toLowerCase();
 
   if (!query) {
@@ -44,4 +43,14 @@ searchInput.addEventListener("keydown", function(event) {
       </div>
     </article>
   `).join("");
+}
+
+searchInput.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    performSearch();
+  }
+});
+
+searchButton.addEventListener("click", function() {
+  performSearch();
 });
