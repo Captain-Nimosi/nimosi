@@ -1,127 +1,291 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
+
 <meta charset="UTF-8">
+
 <title>{{ page.title }}</title>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
 
-  body {
-    font-family: 'Noto Serif', serif;
-    font-size: 14px;
-    color: #111;
-    background: #fff;
-    margin: 0;
-    padding: 60px 40px;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
 
-  .archive-list {
+
+body {
+
+  font-family: 'Noto Serif', serif;
+
+  font-size: 14px;
+
+  color: #111;
+
+  background: #fff;
+
+  margin: 0;
+
+  padding: 60px 40px;
+
+}
+
+
+/* Page title */
+
+.page-title {
+
+  font-weight: 700;
+
+  font-size: 16px;
+
+  margin-bottom: 20px;
+
+}
+
+
+/* Page / Post content */
+
+.post-content {
+
   line-height: 1.8;
-  }
 
-  .page-title {
-    font-weight: 700;
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
+  max-width: 600px;
 
-  .post-content {
-    line-height: 1.8;
-    max-width: 600px;
-  }
+}
 
-  .search-box {
-  margin-bottom: 30px;
-  }
 
-  .search-container {
+/* Archive list */
+
+.archive-list {
+
+  line-height: 1.8;
+
+}
+
+
+/* General links */
+
+a {
+
+  color: #0000EE;
+
+  text-decoration: underline;
+
+}
+
+
+a:hover {
+
+  color: #0000AA;
+
+}
+
+
+/* Back */
+
+.back {
+
+  margin-top: 60px;
+
+}
+
+
+.back a {
+
+  color: #111;
+
+  text-decoration: underline;
+
+}
+
+
+/* =================================
+   SEARCH
+   ================================= */
+
+
+/* Search container */
+
+.search-container {
+
   display: inline-block;
-  }
+
+}
+
+
+/* Normal "search" text */
 
 .search-label {
-  cursor: default;
-  }
+
+  display: inline-block;
+
+  color: #111;
+
+  text-decoration: underline;
+
+}
+
+
+/* Search input is hidden by default */
 
 .search-input-wrapper {
+
   display: none;
-  margin-top: 8px;
+
   align-items: center;
-  }
+
+}
+
+
+/* Hover:
+   search → search input */
+
+.search-container:hover .search-label {
+
+  display: none;
+
+}
+
 
 .search-container:hover .search-input-wrapper {
+
   display: flex;
-  }
-  
-  #search-input {
-    font-family: 'Noto Serif', serif;
-    font-size: 14px;
-    border: none;
-    border-bottom: 1px solid #111;
-    outline: none;
-    width: 200px;
-    padding: 4px 0;
-    background: transparent;
-   }
 
-  #search-button {
-    font-family: 'Noto Serif', serif;
-    font-size: 14px;
-    color: #0000EE;
-    background: none;
-    border: none;
-    padding: 0;
-    margin-left: 10px;
-    text-decoration: underline;
-    cursor: pointer;
-  }
+}
 
-  #search-button:hover {
-    color: #0000AA;
-   }
 
-  #search-input::placeholder {
-    color: #111;
-  }
+/* After search:
+   keep search input visible */
 
-  .search-result {
-    margin-bottom: 20px;
-  }
+.search-container.search-active .search-label {
 
-  .search-result div:first-child {
-    margin-bottom: 2px;
-  }
+  display: none;
 
-  .search-result div:last-child {
-    font-size: 14px;
-  }
-  
-  a {
-    color: #0000EE;
-    text-decoration: underline;
-  }
+}
 
-  a:hover {
-    color: #0000AA;
-  }
 
-  .back a {
-    color: #111;
-    text-decoration: underline;
-  }
+.search-container.search-active .search-input-wrapper {
 
-  .back {
-    margin-top: 60px;
-  }
+  display: flex;
+
+}
+
+
+/* Search input */
+
+#search-input {
+
+  font-family: 'Noto Serif', serif;
+
+  font-size: 14px;
+
+  color: #111;
+
+  border: none;
+
+  border-bottom: 1px solid #111;
+
+  outline: none;
+
+  width: 200px;
+
+  padding: 4px 0;
+
+  background: transparent;
+
+}
+
+
+/* Go button */
+
+#search-button {
+
+  font-family: 'Noto Serif', serif;
+
+  font-size: 14px;
+
+  color: #0000EE;
+
+  background: none;
+
+  border: none;
+
+  padding: 0;
+
+  margin-left: 10px;
+
+  text-decoration: underline;
+
+  cursor: pointer;
+
+}
+
+
+#search-button:hover {
+
+  color: #0000AA;
+
+}
+
+
+/* Search results */
+
+#search-results {
+
+  margin-top: 40px;
+
+}
+
+
+.search-result {
+
+  margin-bottom: 20px;
+
+}
+
+
+.search-result div:first-child {
+
+  margin-bottom: 2px;
+
+}
+
+
+.search-result div:last-child {
+
+  font-size: 14px;
+
+}
+
+
 </style>
+
 </head>
 
+
 <body>
-  <div class="page-title">{{ page.title }}</div>
 
-  <div class="post-content">{{ content }}</div>
 
-  <div class="back">
-   <a href="javascript:history.back()">back</a>
+<div class="page-title">
+
+  {{ page.title }}
+
 </div>
+
+
+<div class="post-content">
+
+  {{ content }}
+
+</div>
+
+
+<div class="back">
+
+  <a href="javascript:history.back()">back</a>
+
+</div>
+
+
 </body>
+
 </html>
