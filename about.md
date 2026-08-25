@@ -2,6 +2,7 @@
 layout: post
 title: about
 permalink: /about/
+back_url: /
 ---
 
 About
