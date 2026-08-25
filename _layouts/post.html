@@ -121,11 +121,7 @@
   <div class="post-content">{{ content }}</div>
 
   <div class="back">
-  {% if page.back_url %}
-    <a href="{{ site.baseurl }}{{ page.back_url }}">back</a>
-  {% else %}
-    <a href="{{ site.baseurl }}/{{ page.categories | first }}/">back</a>
-  {% endif %}
-  </div>
+   <a href="javascript:history.back()">back</a>
+</div>
 </body>
 </html>
