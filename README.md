@@ -164,6 +164,43 @@ Archive는 `site.categories`를 이용해 포스트가 존재하는 카테고리
 ```
 
 ---
+## 검색 기능
+
+### 구조
+
+검색은 4개 파일로 구성된다.
+
+| 파일 | 역할 |
+|---|---|
+| `search.json` | 전체 포스트를 JSON으로 변환한 검색 데이터 (빌드 타임에 자동 생성) |
+| `search.md` | 검색 페이지. `post.html` layout을 사용하며 검색 UI 마크업 포함 |
+| `assets/js/search.js` | 검색 로직 (데이터 fetch, 필터링, 결과 렌더링) |
+| `_layouts/post.html` | 검색 UI의 CSS 정의 (hover 전환, 입력창, 결과 스타일) |
+
+### 데이터 생성 방식
+
+`search.json`은 `site.posts`를 순회하며 각 포스트의 `title`, `content`(HTML 태그 제거), `date`, `category`, `url`을 JSON 배열로 만든다.
+
+별도 빌드 도구 없이 Jekyll이 페이지 빌드 시 자동으로 생성한다.
+
+### 검색 동작 방식
+
+1. 평소에는 `search`라는 텍스트만 표시된다 (`.search-label`)
+2. 마우스를 올리면(hover) 밑줄 있는 입력창 + `go` 버튼으로 바뀐다
+3. 검색어 입력 후 Enter 또는 `go` 버튼 클릭 시 `performSearch()` 실행
+4. `search.json`에서 미리 불러온 데이터 중 title 또는 content에 검색어가 포함된 포스트만 필터링
+5. 결과는 최신순(date 내림차순)으로 정렬돼 결과 영역에 렌더링
+6. 검색이 한 번 실행되면 입력창이 hover 없이도 계속 유지된다
+
+### 검색 결과 표시 항목
+
+각 결과는 `날짜 + 제목`(파란 링크) 그리고 아래 줄에 `카테고리`를 함께 보여준다.
+
+### 파일 간 관계
+
+`search.md`의 본문(검색 UI 마크업)은 `post.html`의 `{{ content }}` 위치에 삽입된다.
+따라서 검색 UI를 감싸는 CSS는 `post.html`에, 실제 요소는 `search.md`에 나뉘어 있다.
+---
 
 ## back 링크 규칙
 
