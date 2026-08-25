@@ -2,7 +2,6 @@
 layout: post
 title: search
 permalink: /search/
-back_url: /
 ---
 
 <div class="search-container">
