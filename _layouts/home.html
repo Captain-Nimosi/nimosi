@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>{{ page.title }}</title>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
+
   body {
     font-family: 'Noto Serif', serif;
     font-size: 14px;
@@ -13,19 +15,43 @@
     margin: 0;
     padding: 60px 40px;
   }
-  .page-title { font-weight: 700; font-size: 16px; margin-bottom: 16px; }
-  .links { line-height: 2.2; }
-  a { color: #0000EE; text-decoration: underline; }
-  a:hover { color: #0000AA; }
+
+  .page-title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .links {
+    line-height: 2.2;
+  }
+
+  a {
+    color: #0000EE;
+    text-decoration: underline;
+  }
+
+  a:hover {
+    color: #0000AA;
+  }
 </style>
 </head>
+
 <body>
-  <div class="page-title">{{ page.title }}</div>
-  <div class="links">
-    {% assign cats = site.categories | sort %}
-    {% for cat in cats %}
-      <div><a href="{{ site.baseurl }}/{{ cat[0] }}/">{{ cat[0] }}</a></div>
-    {% endfor %}
+
+<div class="page-title">
+  <a href="{{ site.baseurl }}/">NIMOSI</a>
+</div>
+
+<div class="links">
+  <div>
+    <a href="{{ site.baseurl }}/about/">ABOUT</a>
   </div>
+
+  <div>
+    <a href="{{ site.baseurl }}/archive/">ARCHIVE</a>
+  </div>
+</div>
+
 </body>
 </html>
