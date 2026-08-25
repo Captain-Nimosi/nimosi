@@ -16,26 +16,55 @@ function escapeRegExp(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function highlight(text, query) {
-  const escaped = escapeHtml(text);
-  const regex = new RegExp(`(${escapeRegExp(query)})`, "gi");
-  return escaped.replace(regex, "<mark>$1</mark>");
+function buildQueryVariants(query) {
+  const variants = new Set([query]);
+  if (query.length > 1) {
+    if (query.endsWith("y")) {
+      variants.add(query.slice(0, -1) + "ies");
+    }
+    variants.add(query + "s");
+    variants.add(query + "es");
+  }
+  return Array.from(variants);
 }
 
-function getSnippet(content, query) {
+function buildHighlightRegex(variants) {
+  const pattern = variants
+    .map(escapeRegExp)
+    .sort((a, b) => b.length - a.length)
+    .join("|");
+  return new RegExp(`(${pattern})`, "gi");
+}
+
+function highlight(text, regex) {
+  return escapeHtml(text).replace(regex, "<mark>$1</mark>");
+}
+
+function findEarliestMatch(text, variants) {
+  const lowerText = text.toLowerCase();
+  let best = null;
+  variants.forEach(v => {
+    const idx = lowerText.indexOf(v.toLowerCase());
+    if (idx !== -1 && (best === null || idx < best)) {
+      best = idx;
+    }
+  });
+  return best;
+}
+
+function getSnippet(content, variants, regex) {
   const flatContent = content.replace(/\s+/g, " ").trim();
-  const lowerContent = flatContent.toLowerCase();
-  const idx = lowerContent.indexOf(query);
-  if (idx === -1) return "";
+  const idx = findEarliestMatch(flatContent, variants);
+  if (idx === null) return "";
 
   const start = Math.max(0, idx - 20);
-  const end = Math.min(flatContent.length, idx + query.length + 60);
+  const end = Math.min(flatContent.length, idx + 80);
 
   let snippet = flatContent.substring(start, end);
   if (start > 0) snippet = "…" + snippet;
   if (end < flatContent.length) snippet = snippet + "…";
 
-  return highlight(snippet, query);
+  return highlight(snippet, regex);
 }
 
 fetch("/nimosi/search.json")
@@ -57,17 +86,16 @@ function performSearch() {
     return;
   }
 
+  const variants = buildQueryVariants(query);
+  const regex = buildHighlightRegex(variants);
+
   const results = posts
     .filter(post =>
-      post.title.toLowerCase().includes(query) ||
-      post.content.toLowerCase().includes(query)
+      findEarliestMatch(post.title, variants) !== null ||
+      findEarliestMatch(post.content, variants) !== null
     )
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  /*
-   * 검색이 실행되면
-   * hover하지 않아도 검색창을 계속 표시
-   */
   searchContainer.classList.add("search-active");
 
   if (results.length === 0) {
@@ -76,8 +104,8 @@ function performSearch() {
   }
 
   searchResults.innerHTML = results.map(post => {
-    const snippet = getSnippet(post.content, query);
-    const highlightedTitle = highlight(post.title, query);
+    const snippet = getSnippet(post.content, variants, regex);
+    const highlightedTitle = highlight(post.title, regex);
     return `
       <article class="search-result">
         <div class="search-result-header">
@@ -88,7 +116,7 @@ function performSearch() {
       </article>
     `;
   }).join("");
-  }
+}
 
 
 /*
