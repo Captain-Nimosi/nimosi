@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>{{ page.title }}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
+
+  body {
+    font-family: 'Noto Serif', serif;
+    font-size: 14px;
+    color: #111;
+    background: #fff;
+    margin: 0;
+    padding: 60px 40px;
+  }
+
+  .page-title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .page-content {
+    line-height: 1.8;
+    max-width: 600px;
+  }
+
+  a {
+    color: #0000EE;
+    text-decoration: underline;
+  }
+
+  a:hover {
+    color: #0000AA;
+  }
+
+  .back a {
+    color: #111;
+    text-decoration: underline;
+  }
+
+  .back {
+    margin-top: 60px;
+  }
+</style>
+</head>
+
+<body>
+  <div class="page-title">{{ page.title }}</div>
+
+  <div class="page-content">{{ content }}</div>
+
+  <div class="back">
+    <a href="{{ site.baseurl }}/">back</a>
+  </div>
+</body>
+</html>
