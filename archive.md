@@ -7,6 +7,8 @@ back_url: /
 
 {% assign categories = site.categories | sort %}
 
+<div class="archive-list">
 {% for category in categories %}
-<a href="{{ site.baseurl }}/{{ category[0] }}/">{{ category[0] }}</a><br>
+  <div><a href="{{ site.baseurl }}/{{ category[0] }}/">{{ category[0] }}</a></div>
 {% endfor %}
+</div>
