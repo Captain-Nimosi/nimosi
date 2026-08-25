@@ -5,7 +5,8 @@ permalink: /archive/
 back_url: /
 ---
 
-- [thoughts]({{ site.baseurl }}/thoughts/)
-- [canada]({{ site.baseurl }}/canada/)
-- [money]({{ site.baseurl }}/money/)
-- [kitchen]({{ site.baseurl }}/kitchen/)
+{% assign categories = site.categories | sort %}
+
+{% for category in categories %}
+<a href="{{ site.baseurl }}/{{ category[0] }}/">{{ category[0] }}</a><br>
+{% endfor %}
