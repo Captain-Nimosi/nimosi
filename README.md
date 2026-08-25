@@ -9,8 +9,9 @@
 - `archive` — 카테고리 목록
 - `category` — 카테고리별 글 목록
 - `post` — 개별 글
+- `search` — 검색 페이지
 
-Home에서는 카테고리를 직접 보여주지 않고 `about`과 `archive`로 연결한다.
+Home에서는 카테고리를 직접 보여주지 않고 `about`과 `archive`, `search`로 연결한다.
 
 Archive에서는 실제 포스트가 존재하는 카테고리만 자동으로 표시한다.
 
@@ -42,13 +43,16 @@ permalink: /카테고리명/
 ---
 ```
 
+2. 위 카테고리 목록 표에 한 줄 추가
+3. 글 쓸 때 `categories: [카테고리명]`으로 태그하면 Archive와 홈 흐름에 자동으로 반영됨
+
 ---
 
 ## 카테고리 삭제하는 법
 
 1. 해당 스텁 파일(`카테고리명.html`) 삭제
 2. 해당 카테고리의 글을 삭제하거나 다른 카테고리로 재태그
-3. 위 카테고리 목록에서 해당 줄 삭제
+3. 위 카테고리 목록 표에서 해당 줄 삭제
 
 Archive는 실제 포스트가 있는 카테고리만 자동으로 표시하므로, 포스트가 모두 없어지면 Archive에서도 자동으로 사라진다.
 
@@ -131,11 +135,10 @@ Markdown에서:
 layout: post
 title: about
 permalink: /about/
-back_url: /
 ---
 ```
 
-About은 `post.html`을 사용하며 back을 누르면 Home으로 돌아간다.
+About은 `post.html`을 사용한다.
 
 ---
 
@@ -148,7 +151,6 @@ About은 `post.html`을 사용하며 back을 누르면 Home으로 돌아간다.
 layout: post
 title: archive
 permalink: /archive/
-back_url: /
 ---
 ```
 
@@ -164,6 +166,7 @@ Archive는 `site.categories`를 이용해 포스트가 존재하는 카테고리
 ```
 
 ---
+
 ## 검색 기능
 
 ### 구조
@@ -176,6 +179,11 @@ Archive는 `site.categories`를 이용해 포스트가 존재하는 카테고리
 | `search.md` | 검색 페이지. `post.html` layout을 사용하며 검색 UI 마크업 포함 |
 | `assets/js/search.js` | 검색 로직 (데이터 fetch, 필터링, 결과 렌더링) |
 | `_layouts/post.html` | 검색 UI의 CSS 정의 (hover 전환, 입력창, 결과 스타일) |
+
+### 파일 간 관계
+
+`search.md`의 본문(검색 UI 마크업)은 `post.html`의 `{{ content }}` 위치에 삽입된다.
+따라서 검색 UI를 감싸는 CSS는 `post.html`에, 실제 요소는 `search.md`에 나뉘어 있다.
 
 ### 데이터 생성 방식
 
@@ -196,10 +204,6 @@ Archive는 `site.categories`를 이용해 포스트가 존재하는 카테고리
 
 각 결과는 `날짜 + 제목`(파란 링크) 그리고 아래 줄에 `카테고리`를 함께 보여준다.
 
-### 파일 간 관계
-
-`search.md`의 본문(검색 UI 마크업)은 `post.html`의 `{{ content }}` 위치에 삽입된다.
-따라서 검색 UI를 감싸는 CSS는 `post.html`에, 실제 요소는 `search.md`에 나뉘어 있다.
 ---
 
 ## back 링크 규칙
@@ -228,15 +232,16 @@ nimosi
 
 about
 archive
+search
 ```
 사이트 제목은 `_config.yml`의 `title`에서 가져온다.
 
 **category.html**
-카테고리별 포스트 목록을 표시한다.
+카테고리별 포스트 목록을 표시한다. 목록은 `날짜 + 제목` 형식으로 표시된다.
 
 **post.html**
-개별 포스트와 about, archive 페이지에서 공통으로 사용한다.
-`back_url`이 지정된 페이지는 해당 URL로 돌아가고, 일반 포스트는 해당 카테고리로 돌아간다.
+개별 포스트, about, archive, search 페이지에서 공통으로 사용한다.
+본문(`{{ content }}`)에 각 페이지의 실제 마크업이 삽입된다.
 
 ---
 
@@ -269,6 +274,7 @@ archive
 nimosi
 about
 archive
+search
 thoughts
 canada
 money
