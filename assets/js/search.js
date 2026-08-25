@@ -16,6 +16,12 @@ function escapeRegExp(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+function highlight(text, query) {
+  const escaped = escapeHtml(text);
+  const regex = new RegExp(`(${escapeRegExp(query)})`, "gi");
+  return escaped.replace(regex, "<mark>$1</mark>");
+}
+
 function getSnippet(content, query) {
   const flatContent = content.replace(/\s+/g, " ").trim();
   const lowerContent = flatContent.toLowerCase();
@@ -29,9 +35,7 @@ function getSnippet(content, query) {
   if (start > 0) snippet = "…" + snippet;
   if (end < flatContent.length) snippet = snippet + "…";
 
-  snippet = escapeHtml(snippet);
-  const regex = new RegExp(`(${escapeRegExp(query)})`, "gi");
-  return snippet.replace(regex, "<mark>$1</mark>");
+  return highlight(snippet, query);
 }
 
 fetch("/nimosi/search.json")
@@ -72,18 +76,19 @@ function performSearch() {
   }
 
   searchResults.innerHTML = results.map(post => {
-  const snippet = getSnippet(post.content, query);
-  return `
-    <article class="search-result">
-      <div class="search-result-header">
-        <a href="${post.url}">${post.date} ${post.title}</a>
-        <span class="search-result-category">| ${post.category}</span>
-      </div>
-      ${snippet ? `<div class="search-snippet">${snippet}</div>` : ""}
-    </article>
-  `;
-}).join("");
-}
+    const snippet = getSnippet(post.content, query);
+    const highlightedTitle = highlight(post.title, query);
+    return `
+      <article class="search-result">
+        <div class="search-result-header">
+          <a href="${post.url}">${post.date} ${highlightedTitle}</a>
+          <span class="search-result-category">| ${post.category}</span>
+        </div>
+        ${snippet ? `<div class="search-snippet">${snippet}</div>` : ""}
+      </article>
+    `;
+  }).join("");
+  }
 
 
 /*
