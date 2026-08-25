@@ -167,29 +167,11 @@ Archive는 `site.categories`를 이용해 포스트가 존재하는 카테고리
 
 ## back 링크 규칙
 
-back은 항상 현재 페이지의 상위 페이지로 돌아간다.
+back은 무조건 브라우저의 직전 페이지로 돌아간다 (`javascript:history.back()`).
 
-```text
-Home
-├── about
-│   └── back → Home
-└── archive
-    └── category
-        └── back → Archive
-            └── post
-                └── back → Category
-```
+페이지 계층 구조와 무관하게 모든 페이지에서 동일한 방식으로 동작한다.
 
-**페이지별 Back**
-
-| 페이지 | back 대상 |
-|---|---|
-| about | Home |
-| archive | Home |
-| category | Archive |
-| post | 해당 category |
-
-일반 post는 카테고리를 기준으로 자동으로 상위 페이지를 결정한다.
+back 텍스트는 모든 페이지에서 `back`으로 고정한다.
 
 ---
 
