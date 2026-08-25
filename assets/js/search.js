@@ -7,6 +7,9 @@ fetch("/nimosi/search.json")
   .then(response => response.json())
   .then(data => {
     posts = data;
+  })
+  .catch(error => {
+    console.error("Search data could not be loaded:", error);
   });
 
 searchInput.addEventListener("keydown", function(event) {
@@ -19,10 +22,12 @@ searchInput.addEventListener("keydown", function(event) {
     return;
   }
 
-  const results = posts.filter(post =>
-    post.title.toLowerCase().includes(query) ||
-    post.content.toLowerCase().includes(query)
-  );
+  const results = posts
+    .filter(post =>
+      post.title.toLowerCase().includes(query) ||
+      post.content.toLowerCase().includes(query)
+    )
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   if (results.length === 0) {
     searchResults.innerHTML = "<p>No results.</p>";
@@ -32,11 +37,10 @@ searchInput.addEventListener("keydown", function(event) {
   searchResults.innerHTML = results.map(post => `
     <article class="search-result">
       <div>
-        <a href="${post.url}">${post.title}</a>
+        ${post.date} <a href="${post.url}">${post.title}</a>
       </div>
-
       <div>
-        ${post.date} ${post.category}
+        ${post.category}
       </div>
     </article>
   `).join("");
