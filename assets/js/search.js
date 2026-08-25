@@ -17,16 +17,17 @@ function escapeRegExp(str) {
 }
 
 function getSnippet(content, query) {
-  const lowerContent = content.toLowerCase();
+  const flatContent = content.replace(/\s+/g, " ").trim();
+  const lowerContent = flatContent.toLowerCase();
   const idx = lowerContent.indexOf(query);
   if (idx === -1) return "";
 
   const start = Math.max(0, idx - 20);
-  const end = Math.min(content.length, idx + query.length + 60);
+  const end = Math.min(flatContent.length, idx + query.length + 60);
 
-  let snippet = content.substring(start, end);
+  let snippet = flatContent.substring(start, end);
   if (start > 0) snippet = "…" + snippet;
-  if (end < content.length) snippet = snippet + "…";
+  if (end < flatContent.length) snippet = snippet + "…";
 
   snippet = escapeHtml(snippet);
   const regex = new RegExp(`(${escapeRegExp(query)})`, "gi");
