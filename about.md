@@ -2,7 +2,6 @@
 layout: post
 title: about
 permalink: /about/
-back_url: /
 ---
 
 Hello, I'm Nimosi.<br>
