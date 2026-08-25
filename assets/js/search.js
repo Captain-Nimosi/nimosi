@@ -34,16 +34,15 @@ function performSearch() {
   }
 
   searchResults.innerHTML = results.map(post => `
-    <article class="search-result">
-      <div>
-        ${post.date} <a href="${post.url}">${post.title}</a>
-      </div>
-      <div>
-        ${post.category}
-      </div>
-    </article>
+  <article class="search-result">
+    <div>
+      <a href="${post.url}">${post.date} ${post.title}</a>
+    </div>
+    <div>
+      ${post.category}
+    </div>
+  </article>
   `).join("");
-}
 
 searchInput.addEventListener("keydown", function(event) {
   if (event.key === "Enter") {
