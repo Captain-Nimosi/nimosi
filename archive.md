@@ -2,6 +2,7 @@
 layout: post
 title: archive
 permalink: /archive/
+back_url: /
 ---
 
 - [thoughts]({{ site.baseurl }}/thoughts/)
