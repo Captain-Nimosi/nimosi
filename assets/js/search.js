@@ -75,15 +75,11 @@ function performSearch() {
   const snippet = getSnippet(post.content, query);
   return `
     <article class="search-result">
-      <div>
-        <a href="${post.url}">
-          ${post.date} ${post.title}
-        </a>
+      <div class="search-result-header">
+        <a href="${post.url}">${post.date} ${post.title}</a>
+        <span class="search-result-category">| ${post.category}</span>
       </div>
       ${snippet ? `<div class="search-snippet">${snippet}</div>` : ""}
-      <div>
-        ${post.category}
-      </div>
     </article>
   `;
 }).join("");
